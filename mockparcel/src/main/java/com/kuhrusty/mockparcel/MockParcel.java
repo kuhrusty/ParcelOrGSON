@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
  * <p><b>If your reads are failing</b> and you set log to System.err, and it
  * looks like the issue is that one of your fields isn't being written, that may
  * mean you're calling some Parcel method which this doesn't override below
- * (like writeFloatArray() or something), then
+ * (like writeFloatArray() or something). To fix that, you have to add it below.
  * </p>
  */
 public class MockParcel {
