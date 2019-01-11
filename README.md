@@ -53,7 +53,8 @@ You're also going to have a **`deserialize()`** method which calls the
 same `YourClass` constructor:
 
     @Override
-    public YourClass deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public YourClass deserialize(JsonElement json, Type typeOfT,
+            JsonDeserializationContext context) throws JsonParseException {
         return new YourClass(new GsonWrapper(json.getAsJsonObject(), context));
     }
 
@@ -61,7 +62,8 @@ So, all together, your CREATOR looks like this:
 
     public static final CreatorSD<YourClass> CREATOR = new CreatorSD<YourClass>() {
         @Override
-        public YourClass deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        public YourClass deserialize(JsonElement json, Type typeOfT,
+                JsonDeserializationContext context) throws JsonParseException {
             return new YourClass(new GsonWrapper(json.getAsJsonObject(), context));
         }
         @Override
@@ -77,7 +79,8 @@ So, all together, your CREATOR looks like this:
 You're also going to add a `writeToParcel()` method which looks the same
 in every one of your ParcelOrGson classes.  (I would've preferred to do
 this as a **default** method in com.kuhrusty.parcelorgson.Parcelable,
-but it didn't work out.)
+but that required minSdkVersion 24 or something, and I didn't want to do
+that.)
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -157,7 +160,7 @@ In tests, that looks like this:
         ...
     }
 
-**If your test fail,** the first thing to do is turn on logging:
+**If your test fails,** the first thing to do is turn on logging:
 
         MockParcel.log = System.err;
         YourClass copy = MockParcel.parcel(yourThing, YourClass.CREATOR);
