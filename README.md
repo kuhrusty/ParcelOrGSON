@@ -1,4 +1,33 @@
-# ParcelOrGSON
+# ParcelOrGSON and MockParcel
+
+To use this in your project, add this to your `app/build.gradle`:
+
+    repositories {
+        maven {
+            //  for parcelorgson and mockparcel.  Holy crap jitpack is cool, but
+            //  using *allegedly* unmodified code provided by a third party, what
+            //  could go wrong!
+            url 'https://jitpack.io'
+        }
+    }
+
+In your `dependencies` section, for ParcelOrGSON (which, as described below, you
+probably don't need):
+
+    implementation 'com.github.kuhrusty.ParcelOrGSON:parcelorgson:v0.1'
+
+And for MockParcel:
+
+    testImplementation 'com.github.kuhrusty.ParcelOrGSON:mockparcel:v0.1'
+
+MockParcel probably also needs PowerMockito:
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.23.4'
+    testImplementation 'org.powermock:powermock-module-junit4:2.0.0'
+    testImplementation 'org.powermock:powermock-api-mockito2:2.0.0'
+
+## ParcelOrGSON
 
 This is a somewhat dumb wrapper intended to let the same code serialize
 to/from both a Parcel and Gson.  In general, **you don't need this,**
